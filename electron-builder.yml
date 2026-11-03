@@ -1,0 +1,38 @@
+appId: com.themestudio.desktop
+productName: Theme Studio
+copyright: Copyright © Theme Studio
+directories:
+  output: release
+  buildResources: build
+files:
+  - out/**
+  - package.json
+  - app.png
+asar: true
+npmRebuild: false
+extraMetadata:
+  main: out/main/index.js
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: dir
+      arch:
+        - x64
+  icon: build/icon.ico
+  executableName: Theme Studio
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  allowElevation: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Theme Studio
+  uninstallDisplayName: Theme Studio
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+  deleteAppDataOnUninstall: false
+artifactName: ${productName}-Setup-${version}.${ext}

@@ -1,0 +1,121 @@
+{
+  "themes": "Themes",
+  "newTheme": "New Theme",
+  "duplicate": "Duplicate",
+  "rename": "Rename",
+  "delete": "Delete",
+  "import": "Import",
+  "export": "Export",
+  "save": "Save",
+  "saveAs": "Save As",
+  "lastModified": "Last modified",
+  "description": "Theme description",
+  "searchPlaceholder": "Search themes",
+  "noThemesFound": "No themes found",
+  "noFavorites": "No favorites",
+  "noRecent": "No recent themes",
+  "presetBadge": "Preset",
+  "favoriteBadge": "Favorite",
+  "savedBadge": "Saved",
+  "broken": "Unreadable",
+  "deleteTitle": "Delete theme",
+  "deleteBody": "Delete “{{name}}”? This removes the local JSON file.",
+  "untitled": "Untitled Theme",
+  "filterPlaceholder": "Filter themes",
+  "previewing": "Previewing {{name}}",
+  "filters": {
+    "style": "Style",
+    "mode": "Appearance",
+    "all": "All Themes",
+    "glass": "Glassmorphism",
+    "neon": "Neon & Futuristic",
+    "lightweight": "Lightweight & Minimal",
+    "modeAll": "All",
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "tags": {
+    "glass": "Glass",
+    "neon": "Neon",
+    "lightweight": "Lightweight",
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "actions": {
+    "apply": "Apply",
+    "preview": "Preview",
+    "compare": "Compare",
+    "more": "More",
+    "exitPreview": "Exit preview"
+  },
+  "presets": {
+    "neon-glass-blue": {
+      "name": "Neon Glass Blue",
+      "description": "Deep navy glass, electric blue edges, and a soft cyan glow."
+    },
+    "futuristic-electric-blue": {
+      "name": "Futuristic Electric Blue",
+      "description": "Sharper panels, stronger electric blue, and a heavier neon rim."
+    },
+    "cyan-holographic": {
+      "name": "Cyan Holographic",
+      "description": "Translucent cyan glass with a holographic highlight and cooler text."
+    },
+    "dark-glass-professional": {
+      "name": "Dark Glass Professional",
+      "description": "Denser glass, quieter borders, and a restrained blue accent."
+    },
+    "minimal-dark-blue": {
+      "name": "Minimal Dark Blue",
+      "description": "Nearly solid surfaces, no glow, and compact professional geometry."
+    },
+    "aurora-glass": {
+      "name": "Aurora Glass",
+      "description": "Deep ink-green glass, teal edges, and a soft aurora glow."
+    },
+    "cyberpunk-violet": {
+      "name": "Cyberpunk Violet",
+      "description": "Violet neon glass with magenta highlights and a cyan accent."
+    },
+    "arctic-frost": {
+      "name": "Arctic Frost",
+      "description": "Ice-white glass, blue edges, and a soft blue shadow."
+    },
+    "obsidian-mono": {
+      "name": "Obsidian Mono",
+      "description": "Black glass, white highlights, and almost no glow."
+    },
+    "emerald-matrix": {
+      "name": "Emerald Matrix",
+      "description": "Deep green glass with emerald edges and a quiet terminal glow."
+    },
+    "amber-industrial": {
+      "name": "Amber Industrial",
+      "description": "Charcoal glass, amber edges, and a steady console glow."
+    },
+    "nordic-light": {
+      "name": "Nordic Light",
+      "description": "Soft gray-white glass, blue emphasis, and a teal accent."
+    },
+    "pure-white": {
+      "name": "Pure White",
+      "description": "Quiet white surfaces, a fine gray edge, and a blue accent."
+    },
+    "soft-gray": {
+      "name": "Soft Gray",
+      "description": "Neutral gray workspace, white panels, and a teal accent."
+    },
+    "warm-sand": {
+      "name": "Warm Sand",
+      "description": "Warm cream surfaces, brown emphasis, and a muted olive accent."
+    },
+    "mist-blue": {
+      "name": "Mist Blue",
+      "description": "Cool blue-gray canvas, white panels, and a restrained blue accent."
+    },
+    "sage-calm": {
+      "name": "Sage Calm",
+      "description": "Soft green-gray canvas, white panels, and a calm olive accent."
+    }
+  }
+}

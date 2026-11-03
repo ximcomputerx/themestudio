@@ -1,0 +1,12 @@
+{
+  "opacity": "玻璃透明度",
+  "blur": "背景模糊",
+  "saturation": "饱和度",
+  "borderOpacity": "边框不透明度",
+  "innerHighlight": "内高光",
+  "depth": "玻璃层次",
+  "contrast": "玻璃对比度",
+  "low": "低",
+  "medium": "中",
+  "high": "高"
+}

@@ -1,0 +1,12 @@
+{
+  "opacity": "Glass Opacity",
+  "blur": "Background Blur",
+  "saturation": "Saturation",
+  "borderOpacity": "Border Opacity",
+  "innerHighlight": "Inner Highlight",
+  "depth": "Glass Depth",
+  "contrast": "Glass Contrast",
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High"
+}

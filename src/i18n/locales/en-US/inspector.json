@@ -1,0 +1,17 @@
+{
+  "tokenInspector": "Token Inspector",
+  "cssInspector": "CSS Inspector",
+  "computedStyle": "Computed Style",
+  "cssVariables": "CSS Variables",
+  "background": "Background",
+  "color": "Color",
+  "border": "Border",
+  "borderRadius": "Radius",
+  "boxShadow": "Box Shadow",
+  "filter": "Filter",
+  "backdropFilter": "Backdrop Filter",
+  "transition": "Transition",
+  "copyToken": "Copy Token",
+  "copyCss": "Copy CSS",
+  "noElementSelected": "No element selected"
+}

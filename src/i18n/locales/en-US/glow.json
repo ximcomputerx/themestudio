@@ -1,0 +1,17 @@
+{
+  "color": "Glow Color",
+  "intensity": "Glow Intensity",
+  "radius": "Glow Radius",
+  "spread": "Glow Spread",
+  "opacity": "Glow Opacity",
+  "border": "Border Glow",
+  "button": "Button Glow",
+  "focus": "Focus Glow",
+  "hover": "Hover Glow",
+  "active": "Active Glow",
+  "off": "Off",
+  "subtle": "Subtle",
+  "medium": "Medium",
+  "strong": "Strong",
+  "extreme": "Extreme"
+}

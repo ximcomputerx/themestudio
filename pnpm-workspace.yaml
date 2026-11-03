@@ -1,0 +1,11 @@
+overrides:
+  '@electron/get': 5.1.0
+allowBuilds:
+  electron: true
+  electron-winstaller: true
+  esbuild: true
+  '@tailwindcss/oxide': true
+minimumReleaseAgeExclude:
+  - electron@45.2.1
+  - eslint@10.14.0
+  - lucide-react@1.66.0

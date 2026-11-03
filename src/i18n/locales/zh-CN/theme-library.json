@@ -1,0 +1,121 @@
+{
+  "themes": "主题",
+  "newTheme": "新建主题",
+  "duplicate": "复制主题",
+  "rename": "重命名",
+  "delete": "删除",
+  "import": "导入",
+  "export": "导出",
+  "save": "保存",
+  "saveAs": "另存为",
+  "lastModified": "最近修改",
+  "description": "主题描述",
+  "searchPlaceholder": "搜索主题",
+  "noThemesFound": "没有找到主题",
+  "noFavorites": "没有收藏",
+  "noRecent": "没有最近使用的主题",
+  "presetBadge": "预设",
+  "favoriteBadge": "收藏",
+  "savedBadge": "已保存",
+  "broken": "无法读取",
+  "deleteTitle": "删除主题",
+  "deleteBody": "删除“{{name}}”？这会移除本地 JSON 文件。",
+  "untitled": "未命名主题",
+  "filterPlaceholder": "筛选主题",
+  "previewing": "正在预览 {{name}}",
+  "filters": {
+    "style": "风格",
+    "mode": "明暗",
+    "all": "全部主题",
+    "glass": "玻璃拟态",
+    "neon": "霓虹与未来",
+    "lightweight": "轻量极简",
+    "modeAll": "全部",
+    "dark": "深色",
+    "light": "浅色"
+  },
+  "tags": {
+    "glass": "玻璃",
+    "neon": "霓虹",
+    "lightweight": "轻量",
+    "dark": "深色",
+    "light": "浅色"
+  },
+  "actions": {
+    "apply": "应用",
+    "preview": "预览",
+    "compare": "对比",
+    "more": "更多",
+    "exitPreview": "退出预览"
+  },
+  "presets": {
+    "neon-glass-blue": {
+      "name": "霓虹玻璃蓝",
+      "description": "深海军蓝玻璃、电光蓝边缘和柔和的青色辉光。"
+    },
+    "futuristic-electric-blue": {
+      "name": "未来电光蓝",
+      "description": "更利落的面板、更强的电光蓝和更重的霓虹边缘。"
+    },
+    "cyan-holographic": {
+      "name": "青色全息",
+      "description": "半透明青色玻璃、全息高光和偏冷的文字。"
+    },
+    "dark-glass-professional": {
+      "name": "深色专业玻璃",
+      "description": "更密实的玻璃、更安静的边框和克制的蓝色强调。"
+    },
+    "minimal-dark-blue": {
+      "name": "极简深蓝",
+      "description": "接近实色的表面、没有辉光，几何更紧凑。"
+    },
+    "aurora-glass": {
+      "name": "极光玻璃",
+      "description": "墨绿色玻璃、青绿边缘和柔和的极光辉光。"
+    },
+    "cyberpunk-violet": {
+      "name": "赛博紫",
+      "description": "紫色霓虹玻璃、品红高光和青色强调。"
+    },
+    "arctic-frost": {
+      "name": "极地霜",
+      "description": "冰白色玻璃、蓝色边缘和柔和的蓝色阴影。"
+    },
+    "obsidian-mono": {
+      "name": "黑曜单色",
+      "description": "黑色玻璃、白色高光，几乎没有辉光。"
+    },
+    "emerald-matrix": {
+      "name": "翡翠矩阵",
+      "description": "深绿色玻璃、翡翠色边缘和安静的终端辉光。"
+    },
+    "amber-industrial": {
+      "name": "琥珀工业",
+      "description": "炭黑玻璃、琥珀色边缘和稳定的控制台辉光。"
+    },
+    "nordic-light": {
+      "name": "北欧浅色",
+      "description": "柔和的灰白玻璃、蓝色强调和青色点缀。"
+    },
+    "pure-white": {
+      "name": "纯白极简",
+      "description": "白面板、浅灰细边框和蓝色强调，适合长时间阅读。"
+    },
+    "soft-gray": {
+      "name": "柔和灰",
+      "description": "中性灰工作区、白色面板和青色强调，装饰很少。"
+    },
+    "warm-sand": {
+      "name": "暖沙色",
+      "description": "奶油色表面、棕色强调和低饱和的橄榄色点缀。"
+    },
+    "mist-blue": {
+      "name": "雾霾蓝",
+      "description": "浅蓝灰画布、白色面板和克制的蓝色强调。"
+    },
+    "sage-calm": {
+      "name": "鼠尾草绿",
+      "description": "浅灰绿画布、白色面板和安静的橄榄色强调。"
+    }
+  }
+}

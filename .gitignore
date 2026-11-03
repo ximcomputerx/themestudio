@@ -1,0 +1,14 @@
+node_modules
+out
+release
+dist
+coverage
+*.log
+.eslintcache
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+*.local
+.env
+.env.*
+scripts/smoke-result.json

@@ -1,0 +1,17 @@
+{
+  "tokenInspector": "Token 检查器",
+  "cssInspector": "CSS 检查器",
+  "computedStyle": "计算样式",
+  "cssVariables": "CSS 变量",
+  "background": "背景",
+  "color": "颜色",
+  "border": "边框",
+  "borderRadius": "圆角",
+  "boxShadow": "盒阴影",
+  "filter": "滤镜",
+  "backdropFilter": "背景滤镜",
+  "transition": "过渡",
+  "copyToken": "复制 Token",
+  "copyCss": "复制 CSS",
+  "noElementSelected": "未选择元素"
+}

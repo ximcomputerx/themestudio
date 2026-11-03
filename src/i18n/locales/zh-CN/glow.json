@@ -1,0 +1,17 @@
+{
+  "color": "发光颜色",
+  "intensity": "发光强度",
+  "radius": "发光半径",
+  "spread": "发光扩散",
+  "opacity": "发光不透明度",
+  "border": "边框发光",
+  "button": "按钮发光",
+  "focus": "焦点发光",
+  "hover": "悬停发光",
+  "active": "激活发光",
+  "off": "关闭",
+  "subtle": "微弱",
+  "medium": "中等",
+  "strong": "强烈",
+  "extreme": "极强"
+}

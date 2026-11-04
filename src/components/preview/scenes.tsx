@@ -2,17 +2,30 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatFileSize, uiLanguage } from '@/i18n/format'
 import {
+  PvAccordion,
+  PvAlert,
+  PvAvatar,
   PvBadge,
   PvButton,
   PvCheck,
+  PvChip,
+  PvColor,
+  PvCombobox,
+  PvDate,
+  PvEmpty,
   PvField,
   PvIconButton,
   PvInput,
+  PvKbdPair,
   PvNumber,
   PvProgress,
   PvRadio,
+  PvSegment,
   PvSelect,
+  PvSeparator,
+  PvSkeleton,
   PvSlider,
+  PvSpinner,
   PvSwitch,
   PvTabs,
   PvTextarea,
@@ -55,6 +68,7 @@ function CodeBlock({ source }: { source: string }) {
 
 export function DesktopPreview() {
   const { t } = useTranslation('preview')
+  const crumbs = [t('crumbStudio'), t('crumbLibrary'), t('workspaceTitle')]
   const nav = [
     ['settings', t('themeSettings')],
     ['files', t('fileManager')],
@@ -88,31 +102,42 @@ export function DesktopPreview() {
         <div className="pv-titlebar" data-inspect="preview:inspect.titlebar" data-tokens="--ts-color-secondary-background --ts-color-text-primary">
           <strong>{t('sampleApp')}</strong>
           <span>{t('themePreview')}</span>
-          <span style={{ marginLeft: 'auto' }}>{t('connectionStatus')}</span>
+          <span className="pv-push">{t('connectionStatus')}</span>
         </div>
         <div className="pv-toolbar-line" data-inspect="preview:inspect.toolbar" data-tokens="--ts-color-elevated-surface --ts-color-border">
-          <PvButton>{t('save')}</PvButton>
-          <PvButton variant="secondary">{t('cancel')}</PvButton>
-          <PvIconButton label={t('add')} />
-          <div className="pv-tabs pv-toolbar-seg" data-testid="desktop-segments">
-            <button type="button" className="pv-tab is-selected">{t('tabTokens')}</button>
-            <button type="button" className="pv-tab">{t('tabGlass')}</button>
-            <button type="button" className="pv-tab">{t('tabExport')}</button>
+          <div className="pv-toolbar-row">
+            <div className="pv-toolbar-cluster">
+              <PvButton>{t('save')}</PvButton>
+              <PvButton variant="secondary">{t('cancel')}</PvButton>
+              <span className="pv-tip pv-tip-below" data-inspect="preview:inspect.tooltip" data-tokens="--ts-color-glass-popup --ts-glow-border --ts-radius-sm">
+                <PvIconButton label={t('add')} />
+                <span>{t('tokenHint')}</span>
+              </span>
+            </div>
+            <div className="pv-tabs pv-toolbar-seg" data-testid="desktop-segments">
+              <button type="button" className="pv-tab is-selected">{t('tabTokens')}</button>
+              <button type="button" className="pv-tab">{t('tabGlass')}</button>
+              <button type="button" className="pv-tab">{t('tabExport')}</button>
+            </div>
+            <div className="pv-toolbar-cluster pv-toolbar-end">
+              <PvButton variant="secondary">{t('publish')}</PvButton>
+              <PvButton variant="secondary">{t('sync')}</PvButton>
+            </div>
           </div>
-          <div style={{ width: 220 }}>
-            <PvInput placeholder={t('searchThemes')} />
+          <div className="pv-toolbar-row">
+            <div className="pv-toolbar-fill">
+              <PvInput placeholder={t('searchThemes')} />
+              <div className="pv-toolbar-filter" data-testid="desktop-filter">
+                <PvSelect
+                  options={[
+                    ['all', t('filterAll')],
+                    ['dark', t('filterDark')],
+                    ['light', t('filterLight')]
+                  ]}
+                />
+              </div>
+            </div>
           </div>
-          <div style={{ width: 148 }} data-testid="desktop-filter">
-            <PvSelect
-              options={[
-                ['all', t('filterAll')],
-                ['dark', t('filterDark')],
-                ['light', t('filterLight')]
-              ]}
-            />
-          </div>
-          <PvButton variant="secondary">{t('publish')}</PvButton>
-          <PvButton variant="secondary">{t('sync')}</PvButton>
         </div>
         <div className="pv-body">
           <aside className="pv-sidebar pv-glass" data-inspect="preview:inspect.sidebar" data-tokens="--ts-glass-surface --ts-backdrop-filter --ts-color-glass-border --ts-glow-border">
@@ -132,66 +157,82 @@ export function DesktopPreview() {
             ))}
           </aside>
           <div className="pv-main">
-            <div className="pv-stats pv-span-main" data-testid="desktop-stats" data-inspect="preview:inspect.stats" data-tokens="--ts-color-elevated-surface --ts-color-text-primary --ts-color-text-secondary --ts-color-border --ts-radius-lg">
-              {stats.map(([label, value]) => (
-                <div key={label} className="pv-stat">
-                  <strong>{value}</strong>
-                  <span>{label}</span>
+            <div className="pv-main-col">
+              <div className="pv-page-head">
+                <nav className="pv-breadcrumb" data-inspect="preview:inspect.breadcrumb" data-tokens="--ts-color-text-secondary --ts-color-text-primary">
+                  {crumbs.map((item, index) => (
+                    <span key={item} className={index === crumbs.length - 1 ? 'is-current' : undefined}>
+                      {index > 0 ? <span className="pv-muted"> / </span> : null}
+                      {item}
+                    </span>
+                  ))}
+                </nav>
+                <div className="pv-row">
+                  <h3>{t('workspaceTitle')}</h3>
+                  <PvBadge tone="ok">{t('buildPassing')}</PvBadge>
                 </div>
-              ))}
-            </div>
-            <section className="pv-panel pv-glass" data-inspect="preview:inspect.mainPanel" data-tokens="--ts-glass-surface --ts-shadow-outer --ts-inner-highlight --ts-radius-lg">
-              <h3>{t('workspaceTitle')}</h3>
-              <p className="pv-secondary">{t('workspaceBody')}</p>
-              <div className="pv-bars" data-inspect="preview:inspect.chart" data-tokens="--ts-color-primary --ts-color-accent --ts-glow-button">
-                <i style={{ height: '40%' }} />
-                <i style={{ height: '70%' }} />
-                <i style={{ height: '55%' }} />
-                <i style={{ height: '88%' }} />
-                <i style={{ height: '46%' }} />
+                <p className="pv-secondary">{t('workspaceBody')}</p>
               </div>
-              <div className="pv-legend" data-inspect="preview:inspect.legend" data-tokens="--ts-color-primary --ts-color-accent --ts-color-secondary">
-                <span><i className="pv-swatch primary" /> {t('legendPrimary')}</span>
-                <span><i className="pv-swatch accent" /> {t('legendAccent')}</span>
-                <span><i className="pv-swatch secondary" /> {t('legendSecondary')}</span>
-              </div>
-              <div className="pv-row" style={{ marginTop: 12 }}>
-                <PvBadge tone="info">{t('info')}</PvBadge>
-                <PvBadge tone="ok">{t('buildPassing')}</PvBadge>
-                <PvBadge tone="warn">{t('warnings')}</PvBadge>
-              </div>
-              <div className="pv-list" style={{ marginTop: 12 }} data-testid="desktop-activity" data-inspect="preview:inspect.activityList" data-tokens="--ts-color-text-primary --ts-color-text-secondary --ts-color-active-border --ts-color-glass-hover">
-                {activity.map(([id, label, time, badge, tone, state]) => (
-                  <button key={id} type="button" className={cx('pv-list-row', state)} disabled={state === 'is-disabled'}>
+              <div className="pv-stats" data-testid="desktop-stats" data-inspect="preview:inspect.stats" data-tokens="--ts-color-elevated-surface --ts-color-text-primary --ts-color-text-secondary --ts-color-border --ts-radius-lg">
+                {stats.map(([label, value]) => (
+                  <div key={label} className="pv-stat">
+                    <strong>{value}</strong>
                     <span>{label}</span>
-                    <span className="pv-muted">{time}</span>
-                    <PvBadge tone={tone || undefined}>{badge}</PvBadge>
-                  </button>
+                  </div>
                 ))}
               </div>
-            </section>
-            <aside className="pv-float pv-glass" data-inspect="preview:inspect.floatingPanel" data-tokens="--ts-color-glass-popup --ts-shadow-outer --ts-glow-border --ts-radius-xl">
-              <h3>{t('activity')}</h3>
-              <p className="pv-secondary">{t('contrastChecked')}</p>
-              <PvProgress />
-              <p className="pv-muted">{t('updatedJustNow')}</p>
-              <div className="pv-stack" style={{ marginTop: 8 }}>
-                <div className="pv-checkline"><span className="pv-dot" /> {t('checkPassed')}</div>
-                <div className="pv-checkline"><span className="pv-dot warn" /> {t('checkReview')}</div>
-                <div className="pv-checkline"><span className="pv-dot err" /> {t('checkBlocked')}</div>
+              <section className="pv-panel pv-glass pv-block" data-inspect="preview:inspect.mainPanel" data-tokens="--ts-glass-surface --ts-shadow-outer --ts-inner-highlight --ts-radius-lg">
+                <div className="pv-bars" data-inspect="preview:inspect.chart" data-tokens="--ts-color-primary --ts-color-accent --ts-glow-button">
+                  <i style={{ height: '40%' }} />
+                  <i style={{ height: '70%' }} />
+                  <i style={{ height: '55%' }} />
+                  <i style={{ height: '88%' }} />
+                  <i style={{ height: '46%' }} />
+                </div>
+                <div className="pv-legend" data-inspect="preview:inspect.legend" data-tokens="--ts-color-primary --ts-color-accent --ts-color-secondary">
+                  <span><i className="pv-swatch primary" /> {t('legendPrimary')}</span>
+                  <span><i className="pv-swatch accent" /> {t('legendAccent')}</span>
+                  <span><i className="pv-swatch secondary" /> {t('legendSecondary')}</span>
+                </div>
+                <PvField label={t('timeRange')}>
+                  <PvSlider />
+                </PvField>
+                <div className="pv-list pv-activity" data-testid="desktop-activity" data-inspect="preview:inspect.activityList" data-tokens="--ts-color-text-primary --ts-color-text-secondary --ts-color-active-border --ts-color-glass-hover">
+                  {activity.map(([id, label, time, badge, tone, state]) => (
+                    <button key={id} type="button" className={cx('pv-list-row', state)} disabled={state === 'is-disabled'}>
+                      <span>{label}</span>
+                      <span className="pv-muted pv-time">{time}</span>
+                      <PvBadge tone={tone || undefined}>{badge}</PvBadge>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            </div>
+            <aside className="pv-float pv-glass pv-block" data-inspect="preview:inspect.floatingPanel" data-tokens="--ts-color-glass-popup --ts-shadow-outer --ts-glow-border --ts-radius-xl">
+              <h3>{t('settings')}</h3>
+              <PvSwitch label={t('liveSync')} />
+              <PvField label={t('exportCopies')}>
+                <PvNumber />
+              </PvField>
+              <div className="pv-stack">
+                <PvCheck label={t('checkPassed')} checked />
+                <PvCheck label={t('checkReview')} />
+                <PvCheck label={t('checkBlocked')} />
               </div>
-              <div className="pv-row" style={{ marginTop: 10 }}>
+              <PvProgress />
+              <div className="pv-split-actions">
                 <PvButton>{t('save')}</PvButton>
                 <PvButton variant="secondary">{t('sync')}</PvButton>
               </div>
             </aside>
           </div>
         </div>
+        <PvToast />
         <div className="pv-status" data-inspect="preview:inspect.statusBar" data-tokens="--ts-color-secondary-background --ts-color-text-secondary">
           <span className="pv-dot" /> {t('ready')}
           <span>{t('utf8')}</span>
           <span>{t('sampleApp')}</span>
-          <span style={{ marginLeft: 'auto' }}>{t('lineColumn')}</span>
+          <span className="pv-push">{t('lineColumn')}</span>
           <span>{t('spaces')}</span>
         </div>
       </div>
@@ -209,8 +250,8 @@ export function ComponentsPreview() {
     ['archived', t('listArchived'), t('retired'), '', 'is-disabled']
   ] as const
   return (
-    <div className="pv-scene" style={{ display: 'grid', gap: 14 }}>
-      <section className="pv-panel pv-glass">
+    <div className="pv-scene pv-scene-stack">
+      <section className="pv-panel pv-glass pv-block">
         <h3>{t('buttons')}</h3>
         <div className="pv-state-table">
           <header className="pv-secondary">
@@ -233,37 +274,63 @@ export function ComponentsPreview() {
             <PvIconButton disabled />
           </div>
         </div>
-        <div className="pv-row" style={{ marginTop: 10 }}>
+        <div className="pv-row">
           <PvTooltip />
           <PvTooltip open />
         </div>
       </section>
-      <section className="pv-panel pv-glass">
+      <section className="pv-panel pv-glass pv-block">
         <h3>{t('inputs')}</h3>
-        <div className="pv-card-grid">
-          <PvInput placeholder={t('projectName')} />
-          <PvInput placeholder={t('hoverField')} forced="hover" />
-          <PvInput placeholder={t('focusedField')} forced="focus" />
+        <div className="pv-control-stack">
+          <div className="pv-control-row cols-4">
+            <PvInput placeholder={t('projectName')} />
+            <PvInput placeholder={t('hoverField')} forced="hover" />
+            <PvInput placeholder={t('focusedField')} forced="focus" />
+            <PvInput placeholder={t('disabledInput')} defaultValue={t('disabledValue')} disabled />
+          </div>
           <div data-inspect="preview:inspect.searchInput" data-tokens="--ts-color-text-primary --ts-glow-focus">
             <PvInput placeholder={t('searchTokens')} />
           </div>
-          <PvSelect />
-          <PvSelect disabled />
-          <PvCheck testId="check-glass" label={t('includeGlass')} checked />
-          <PvCheck label={t('reducedChrome')} />
-          <PvCheck label={t('stateDisabled')} disabled />
-          <PvRadio label={t('desktopOption')} checked />
-          <PvRadio label={t('workspaceOption')} />
-          <PvRadio label={t('stateDisabled')} disabled />
-          <PvSwitch />
-          <PvSwitch checked={false} label={t('switchOff')} />
-          <PvSwitch disabled label={t('stateDisabled')} />
-          <PvSlider />
-          <PvSlider disabled />
-          <PvNumber testId="number-default" />
-          <PvNumber testId="number-hover" forced="hover" />
-          <PvNumber testId="number-focus" forced="focus" />
-          <PvNumber testId="number-disabled" disabled />
+          <div className="pv-control-row cols-2">
+            <PvSelect />
+            <PvSelect disabled />
+          </div>
+          <div className="pv-control-row cols-3">
+            <PvCheck testId="check-glass" label={t('includeGlass')} checked />
+            <PvCheck label={t('reducedChrome')} />
+            <PvCheck label={t('stateDisabled')} disabled />
+          </div>
+          <div className="pv-control-row cols-3">
+            <PvRadio label={t('desktopOption')} checked />
+            <PvRadio label={t('workspaceOption')} />
+            <PvRadio label={t('stateDisabled')} disabled />
+          </div>
+          <div className="pv-control-row cols-3">
+            <PvSwitch />
+            <PvSwitch checked={false} label={t('switchOff')} />
+            <PvSwitch disabled label={t('stateDisabled')} />
+          </div>
+          <div className="pv-control-row cols-2">
+            <PvSlider />
+            <PvSlider disabled />
+          </div>
+          <div className="pv-control-row cols-4">
+            <PvNumber testId="number-default" />
+            <PvNumber testId="number-hover" forced="hover" />
+            <PvNumber testId="number-focus" forced="focus" />
+            <PvNumber testId="number-disabled" disabled />
+          </div>
+          <PvField label={t('combobox')}>
+            <PvCombobox />
+          </PvField>
+          <div className="pv-control-row cols-2">
+            <PvField label={t('color')}>
+              <PvColor />
+            </PvField>
+            <PvField label={t('date')}>
+              <PvDate />
+            </PvField>
+          </div>
         </div>
       </section>
       <section className="pv-panel pv-glass" data-testid="component-form" data-inspect="preview:inspect.form" data-tokens="--ts-color-text-primary --ts-color-text-muted --ts-color-error --ts-color-border">
@@ -293,7 +360,7 @@ export function ComponentsPreview() {
           </div>
         </div>
       </section>
-      <section className="pv-panel pv-glass" data-testid="component-list">
+      <section className="pv-panel pv-glass pv-block" data-testid="component-list">
         <h3>{t('navTitle')}</h3>
         <nav className="pv-breadcrumb" data-inspect="preview:inspect.breadcrumb" data-tokens="--ts-color-text-secondary --ts-color-text-primary">
           {crumbs.map((item, index) => (
@@ -303,19 +370,12 @@ export function ComponentsPreview() {
             </span>
           ))}
         </nav>
-        <div className="pv-links" style={{ marginTop: 10 }}>
+        <div className="pv-links">
           <button type="button" className="pv-link">{t('linkDefault')}</button>
           <button type="button" className="pv-link is-hover">{t('linkHover')}</button>
           <button type="button" className="pv-link is-disabled" disabled>{t('linkDisabled')}</button>
         </div>
-        <div className="pv-pages" style={{ marginTop: 10 }} data-inspect="preview:inspect.pagination" data-tokens="--ts-color-elevated-surface --ts-color-active-border --ts-color-primary">
-          <button type="button" className="pv-page">{t('pagePrev')}</button>
-          <button type="button" className="pv-page">1</button>
-          <button type="button" className="pv-page is-selected">2</button>
-          <button type="button" className="pv-page">3</button>
-          <button type="button" className="pv-page">{t('pageNext')}</button>
-        </div>
-        <h3 style={{ marginTop: 16 }}>{t('listTitle')}</h3>
+        <h3>{t('listTitle')}</h3>
         <div className="pv-list" data-inspect="preview:inspect.list" data-tokens="--ts-color-text-primary --ts-color-active-border --ts-color-glass-hover --ts-color-text-muted">
           {list.map(([id, label, badge, tone, state]) => (
             <button key={id} type="button" className={cx('pv-list-row', state)} disabled={state === 'is-disabled'}>
@@ -325,24 +385,91 @@ export function ComponentsPreview() {
             </button>
           ))}
         </div>
-        <p className="pv-muted" style={{ margin: '8px 0 0' }}>{t('emptyHint')}</p>
+        <PvEmpty />
       </section>
-      <section className="pv-panel pv-glass">
+      <section className="pv-panel pv-glass pv-block">
+        <h3>{t('tableTitle')}</h3>
+        <div className="pv-table-scroll" data-inspect="preview:inspect.table" data-tokens="--ts-color-border --ts-color-text-primary --ts-color-primary">
+          <table className="pv-table pv-sample-table">
+            <thead>
+              <tr>
+                <th>{t('columnName')}</th>
+                <th>{t('columnGroup')}</th>
+                <th>{t('columnValue')}</th>
+                <th>{t('columnStatus')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {([
+                ['color.primary', t('colorGroup'), 'var(--ts-color-primary)', t('live'), 'is-selected'],
+                ['glass.blur', t('glassGroup'), '8px', t('stable'), 'is-hover'],
+                ['radius.md', t('radiusGroup'), '8px', t('stable'), ''],
+                ['animation.hover', t('animationGroup'), '160ms', t('retired'), 'is-disabled']
+              ] as const).map(([name, group, value, status, state]) => (
+                <tr key={name} className={state}>
+                  <td>{name}</td>
+                  <td>{group}</td>
+                  <td>{value}</td>
+                  <td>{status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="pv-pages pv-pages-end" data-inspect="preview:inspect.pagination" data-tokens="--ts-color-elevated-surface --ts-color-active-border --ts-color-primary">
+          <button type="button" className="pv-page">{t('pagePrev')}</button>
+          <button type="button" className="pv-page">1</button>
+          <button type="button" className="pv-page is-selected">2</button>
+          <button type="button" className="pv-page">3</button>
+          <button type="button" className="pv-page">{t('pageNext')}</button>
+        </div>
+      </section>
+      <section className="pv-panel pv-glass pv-block">
+        <h3>{t('marksTitle')}</h3>
+        <PvDate open />
+        <div className="pv-row">
+          <PvChip>{t('chipGlass')}</PvChip>
+          <PvChip selected>{t('chipNeon')}</PvChip>
+          <PvChip disabled>{t('chipDraft')}</PvChip>
+        </div>
+        <PvAccordion />
+        <div className="pv-stack">
+          <PvAlert tone="info" title={t('alertInfoTitle')} body={t('alertInfoBody')} />
+          <PvAlert tone="warn" title={t('alertWarnTitle')} body={t('alertWarnBody')} />
+          <PvAlert tone="err" title={t('alertErrTitle')} body={t('alertErrBody')} />
+        </div>
+        <PvSkeleton />
+        <div className="pv-row">
+          <PvAvatar initials={t('avatarInitials')} dot="ok" />
+          <PvAvatar initials={t('avatarNordic')} tone="accent" />
+          <PvAvatar initials={t('avatarMuted')} tone="muted" />
+        </div>
+        <PvSeparator />
+        <section className="pv-card pv-glass" data-inspect="preview:inspect.card" data-tokens="--ts-glass-surface --ts-radius-lg --ts-shadow-outer">
+          <h3>{t('cardSampleTitle')}</h3>
+          <p className="pv-secondary">{t('cardSampleBody')}</p>
+          <div className="pv-row">
+            <PvBadge tone="ok">{t('ready')}</PvBadge>
+            <PvButton variant="secondary">{t('review')}</PvButton>
+          </div>
+        </section>
+      </section>
+      <section className="pv-panel pv-glass pv-block">
         <h3>{t('status')}</h3>
+        <PvSegment />
         <PvTabs />
-        <div className="pv-row" style={{ marginTop: 10 }}>
+        <div className="pv-row">
           <PvBadge>{t('accent')}</PvBadge>
           <PvBadge tone="ok">{t('success')}</PvBadge>
           <PvBadge tone="warn">{t('warning')}</PvBadge>
           <PvBadge tone="err">{t('error')}</PvBadge>
           <PvBadge tone="info">{t('info')}</PvBadge>
         </div>
-        <div style={{ marginTop: 10 }}>
+        <div className="pv-progress-row">
+          <PvSpinner />
           <PvProgress />
         </div>
-        <div style={{ marginTop: 10 }}>
-          <PvToast />
-        </div>
+        <PvToast />
       </section>
       <section className="pv-panel pv-glass" data-testid="bilingual-sample" data-inspect="preview:inspect.typeSpecimen" data-tokens="--ts-font-family --ts-font-size --ts-line-height --ts-letter-spacing --ts-color-text">
         <h3>{t('bilingualTitle')}</h3>
@@ -366,7 +493,10 @@ export function DialogPreview() {
           {open ? (
             <section className="pv-dialog pv-glass" data-testid="dialog-form" data-inspect="preview:inspect.glassDialog" data-tokens="--ts-color-glass-popup --ts-backdrop-filter --ts-radius-xl --ts-shadow-outer --ts-glow-border --ts-duration-dialog">
               <div className="pv-dialog-head">
-                <h3>{t('applyPackage')}</h3>
+                <div className="pv-row">
+                  <h3>{t('applyPackage')}</h3>
+                  <PvBadge tone="warn">{t('unsaved')}</PvBadge>
+                </div>
                 <PvIconButton glyph="close" label={t('close')} onClick={close} />
               </div>
               <p className="pv-secondary">{t('applyPackageBody')}</p>
@@ -374,6 +504,9 @@ export function DialogPreview() {
               <div className="pv-stack">
                 <PvField label={t('fieldName')}>
                   <PvInput placeholder={t('fieldName')} defaultValue={t('disabledValue')} />
+                </PvField>
+                <PvField label={t('note')}>
+                  <PvTextarea value={t('noteValue')} />
                 </PvField>
                 <PvField label={t('fieldScope')}>
                   <PvSelect
@@ -384,19 +517,34 @@ export function DialogPreview() {
                     ]}
                   />
                 </PvField>
+                <PvField label={t('date')}>
+                  <PvDate />
+                </PvField>
                 <PvField label={t('fieldTarget')}>
-                  <div className="pv-row">
+                  <div className="pv-choice-grid">
                     <PvRadio name="pv-dialog-target" label={t('desktopOption')} checked />
                     <PvRadio name="pv-dialog-target" label={t('workspaceOption')} />
                   </div>
                 </PvField>
-                <PvCheck label={t('includeGlass')} checked />
-                <PvSwitch />
+                <PvField label={t('fieldOptions')}>
+                  <div className="pv-choice-grid">
+                    <PvCheck label={t('includeGlass')} checked />
+                    <PvSwitch />
+                  </div>
+                </PvField>
+                <PvField label={t('opacity')}>
+                  <PvSlider />
+                </PvField>
+                <PvField label={t('retainCount')}>
+                  <PvNumber />
+                </PvField>
                 <p className="pv-field-error">{t('dialogError')}</p>
-                <div className="pv-row">
+                <div className="pv-dialog-actions">
                   <PvButton variant="secondary" tone="danger" onClick={close}>{t('dangerAction')}</PvButton>
-                  <PvButton variant="secondary" onClick={close}>{t('cancel')}</PvButton>
-                  <PvButton onClick={close}>{t('confirm')}</PvButton>
+                  <div className="pv-dialog-actions-end">
+                    <PvButton variant="secondary" onClick={close}>{t('cancel')}</PvButton>
+                    <PvButton onClick={close}>{t('confirm')}</PvButton>
+                  </div>
                 </div>
               </div>
             </section>
@@ -473,43 +621,79 @@ export function DataPreview() {
     <div className="pv-scene pv-data-grid">
       <section className="pv-panel pv-glass pv-span-2" data-testid="data-table" data-inspect="preview:inspect.table" data-tokens="--ts-color-border --ts-color-text-primary --ts-color-primary">
         <h3>{t('tokensTitle')}</h3>
-        <table className="pv-table">
+        <div className="pv-table-bar">
+          <div className="pv-table-search">
+            <PvInput placeholder={t('searchTokens')} />
+          </div>
+          <div className="pv-table-filter">
+            <PvSelect
+              options={[
+                ['all', t('filterAny')],
+                ['live', t('live')],
+                ['edited', t('edited')]
+              ]}
+            />
+          </div>
+          <PvIconButton label={t('add')} />
+          <PvButton>{t('exportNav')}</PvButton>
+        </div>
+        <table className="pv-table pv-data-table">
+          <colgroup>
+            <col className="pv-col-check" />
+            <col className="pv-col-name" />
+            <col className="pv-col-group" />
+            <col className="pv-col-value" />
+            <col className="pv-col-contrast" />
+            <col className="pv-col-status" />
+          </colgroup>
           <thead>
             <tr>
+              <th />
               <th>{t('columnName')}</th>
               <th>{t('columnGroup')}</th>
               <th>{t('columnValue')}</th>
-              <th>{t('columnContrast')}</th>
+              <th className="pv-num">{t('columnContrast')}</th>
               <th>{t('columnStatus')}</th>
             </tr>
           </thead>
           <tbody>
             {rows.map(([name, group, value, contrast, status, tone, state]) => (
               <tr key={name} className={state}>
+                <td>
+                  <PvCheck label="" checked={state === 'is-selected'} disabled={state === 'is-disabled'} />
+                </td>
                 <td>{name}</td>
                 <td>{group}</td>
                 <td>{value}</td>
-                <td>{contrast}</td>
+                <td className="pv-num">{contrast}</td>
                 <td><span className={cx('pv-dot', tone)} /> {status}</td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="pv-pages pv-pages-end" data-inspect="preview:inspect.pagination" data-tokens="--ts-color-elevated-surface --ts-color-active-border --ts-color-primary">
+          <button type="button" className="pv-page">{t('pagePrev')}</button>
+          <button type="button" className="pv-page">1</button>
+          <button type="button" className="pv-page is-selected">2</button>
+          <button type="button" className="pv-page">3</button>
+          <button type="button" className="pv-page">{t('pageNext')}</button>
+        </div>
       </section>
-      <section className="pv-panel pv-glass" data-inspect="preview:inspect.fileList" data-tokens="--ts-color-text-secondary --ts-color-border">
+      <section className="pv-panel pv-glass pv-block" data-inspect="preview:inspect.fileList" data-tokens="--ts-color-text-secondary --ts-color-border">
         <h3>{t('files')}</h3>
         <table className="pv-files">
           <tbody>
             {files.map(([name, size]) => (
               <tr key={name}>
                 <td>{name}</td>
-                <td className="pv-muted">{formatFileSize(size, language)}</td>
+                <td className="pv-muted pv-num">{formatFileSize(size, language)}</td>
               </tr>
             ))}
           </tbody>
         </table>
+        <button type="button" className="pv-link">{t('openFolder')}</button>
       </section>
-      <section className="pv-panel pv-glass" data-inspect="preview:inspect.tree" data-tokens="--ts-color-text-secondary --ts-radius-control">
+      <section className="pv-panel pv-glass pv-block" data-inspect="preview:inspect.tree" data-tokens="--ts-color-text-secondary --ts-radius-control">
         <h3>{t('tree')}</h3>
         <div className="pv-tree">
           {tree.map(([id, label, depth, state]) => (
@@ -519,14 +703,16 @@ export function DataPreview() {
           ))}
         </div>
       </section>
-      <section className="pv-card pv-glass" data-inspect="preview:inspect.card" data-tokens="--ts-glass-surface --ts-radius-lg --ts-shadow-outer">
+      <section className="pv-card pv-glass pv-card-fill" data-inspect="preview:inspect.card" data-tokens="--ts-glass-surface --ts-radius-lg --ts-shadow-outer">
         <h3>{t('packageTitle')}</h3>
         <p className="pv-secondary">{t('packageBody')}</p>
-        <PvProgress />
-        <div className="pv-row" style={{ marginTop: 8 }}>
-          <span className="pv-dot" /> {t('ready')}
-          <span className="pv-dot warn" /> {t('review')}
-          <span className="pv-dot err" /> {t('blocked')}
+        <div className="pv-card-foot">
+          <PvProgress />
+          <div className="pv-row">
+            <span className="pv-dot" /> {t('ready')}
+            <span className="pv-dot warn" /> {t('review')}
+            <span className="pv-dot err" /> {t('blocked')}
+          </div>
         </div>
       </section>
       <section className="pv-card pv-glass" data-inspect="preview:inspect.recentExports" data-tokens="--ts-color-text-primary --ts-color-border --ts-color-success --ts-color-warning --ts-color-error">
@@ -565,10 +751,13 @@ export function WorkspacePreview() {
     <div className="pv-scene">
       <div className="pv-workspace">
         <aside className="pv-sidebar pv-glass" data-inspect="preview:inspect.workspaceNav" data-tokens="--ts-glass-surface --ts-backdrop-filter">
+          <div className="pv-avatar-line">
+            <PvAvatar initials={t('avatarInitials')} caption={t('avatarName')} dot="ok" />
+          </div>
           {nav.map(([id, item], index) => (
             <button key={id} type="button" className={index === 2 ? 'pv-nav-item is-selected' : 'pv-nav-item'}>{item}</button>
           ))}
-          <div style={{ margin: '8px 0' }} data-testid="workspace-search">
+          <div className="pv-workspace-search" data-testid="workspace-search">
             <PvInput placeholder={t('searchProjects')} />
           </div>
           <div className="pv-kicker pv-kicker-split">{t('files')}</div>
@@ -623,7 +812,10 @@ export function WorkspacePreview() {
           <span>{file}</span>
           <span>{t('utf8')}</span>
           <span>{t('statusLanguage')}</span>
-          <span style={{ marginLeft: 'auto' }}>{t('spaces')}</span>
+          <span className="pv-push pv-status-end">
+            <PvKbdPair />
+            <span>{t('spaces')}</span>
+          </span>
         </div>
       </div>
     </div>

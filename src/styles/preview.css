@@ -83,7 +83,7 @@
 
 .pv-app {
   display: grid;
-  grid-template-rows: 42px auto minmax(360px, auto) auto 28px;
+  grid-template-rows: 42px auto minmax(360px, auto) 28px;
   min-height: 620px;
   border-radius: var(--ts-radius-xl);
   overflow: hidden;
@@ -199,12 +199,6 @@
 .pv-dialog-actions-end { display: flex; gap: 8px; flex: none; }
 
 .pv-dialog-side > * { width: 100%; min-width: 0; box-sizing: border-box; }
-
-.pv-app > .pv-toast.pv-glass {
-  border-radius: 0;
-  border-left-width: 0;
-  border-right-width: 0;
-}
 
 .pv-body {
   display: grid;

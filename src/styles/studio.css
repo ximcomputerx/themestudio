@@ -322,7 +322,8 @@ button {
 .inspector::-webkit-scrollbar,
 .studio-select-menu::-webkit-scrollbar,
 .pv-editor::-webkit-scrollbar,
-.pv-terminal::-webkit-scrollbar {
+.pv-terminal::-webkit-scrollbar,
+.pv-state-table::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
@@ -335,7 +336,8 @@ button {
 .inspector::-webkit-scrollbar-thumb,
 .studio-select-menu::-webkit-scrollbar-thumb,
 .pv-editor::-webkit-scrollbar-thumb,
-.pv-terminal::-webkit-scrollbar-thumb {
+.pv-terminal::-webkit-scrollbar-thumb,
+.pv-state-table::-webkit-scrollbar-thumb {
   background: color-mix(in srgb, var(--color-studio-text) 22%, transparent);
   border-radius: 99px;
 }

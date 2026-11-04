@@ -68,12 +68,12 @@ function CodeBlock({ source }: { source: string }) {
 
 export function DesktopPreview() {
   const { t } = useTranslation('preview')
-  const crumbs = [t('crumbStudio'), t('crumbLibrary'), t('workspaceTitle')]
+  const crumbs = [t('desktopCrumb'), t('crumbLibrary'), t('workspaceTitle')]
   const nav = [
     ['settings', t('themeSettings')],
     ['files', t('fileManager')],
     ['projects', t('projects')],
-    ['tokens', t('tokens')],
+    ['tokens', t('desktopNavTokens')],
     ['status', t('connectionStatus')]
   ] as const
   const recent = [
@@ -111,11 +111,11 @@ export function DesktopPreview() {
               <PvButton variant="secondary">{t('cancel')}</PvButton>
               <span className="pv-tip pv-tip-below" data-inspect="preview:inspect.tooltip" data-tokens="--ts-color-glass-popup --ts-glow-border --ts-radius-sm">
                 <PvIconButton label={t('add')} />
-                <span>{t('tokenHint')}</span>
+                <span>{t('desktopTokenHint')}</span>
               </span>
             </div>
             <div className="pv-tabs pv-toolbar-seg" data-testid="desktop-segments">
-              <button type="button" className="pv-tab is-selected">{t('tabTokens')}</button>
+              <button type="button" className="pv-tab is-selected">{t('desktopTabTokens')}</button>
               <button type="button" className="pv-tab">{t('tabGlass')}</button>
               <button type="button" className="pv-tab">{t('tabExport')}</button>
             </div>
@@ -227,7 +227,6 @@ export function DesktopPreview() {
             </aside>
           </div>
         </div>
-        <PvToast />
         <div className="pv-status" data-inspect="preview:inspect.statusBar" data-tokens="--ts-color-secondary-background --ts-color-text-secondary">
           <span className="pv-dot" /> {t('ready')}
           <span>{t('utf8')}</span>

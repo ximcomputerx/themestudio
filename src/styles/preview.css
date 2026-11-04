@@ -1468,3 +1468,49 @@
   .pv-table-search { flex: 1 1 100%; }
   .pv-dialog-actions { flex-wrap: wrap; }
 }
+
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-btn,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-icon-btn,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-input,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-select,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-number,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-tab,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-nav-item,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-list-row,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-chip,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-page,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-badge,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-kbd,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-calendar-nav,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-day,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-alert,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-spinner,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-progress,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-link,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-check input,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-radio input,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-switch input,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-tree button,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-menu button,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-color-swatch span,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-accordion-item button,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-terminal-line input {
+  box-shadow: var(--ts-glow-button);
+}
+
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-app,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-workspace,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-titlebar,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-status,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-stat,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-editor,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-terminal-dock {
+  box-shadow: var(--ts-glow-border);
+}
+
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-chip:disabled,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-day:disabled,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-link:disabled,
+:where(.theme-scope[data-theme-preset="neon-glass-blue"]) .pv-link.is-disabled {
+  box-shadow: none;
+}

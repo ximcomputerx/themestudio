@@ -1315,3 +1315,38 @@ input[type='color']:focus {
   line-height: var(--ts-line-height, 1.5);
   letter-spacing: var(--ts-letter-spacing, 0);
 }
+
+:where(html[data-shell-preset="neon-glass-blue"]) .ui-btn,
+:where(html[data-shell-preset="neon-glass-blue"]) .icon-btn,
+:where(html[data-shell-preset="neon-glass-blue"]) .text-btn,
+:where(html[data-shell-preset="neon-glass-blue"]) .shell-theme-switch,
+:where(html[data-shell-preset="neon-glass-blue"]) .num,
+:where(html[data-shell-preset="neon-glass-blue"]) .studio-select,
+:where(html[data-shell-preset="neon-glass-blue"]) input[type="color"],
+:where(html[data-shell-preset="neon-glass-blue"]) .filter-chip,
+:where(html[data-shell-preset="neon-glass-blue"]) .token-chip,
+:where(html[data-shell-preset="neon-glass-blue"]) .studio-switch,
+:where(html[data-shell-preset="neon-glass-blue"]) .token-tabs button,
+:where(html[data-shell-preset="neon-glass-blue"]) .shell-menu [role="menuitem"],
+:where(html[data-shell-preset="neon-glass-blue"]) .seg button,
+:where(html[data-shell-preset="neon-glass-blue"]) .section-head {
+  box-shadow: var(--ts-glow-button, 0 0 0 0 transparent);
+}
+
+:where(html[data-shell-preset="neon-glass-blue"]) .seg,
+:where(html[data-shell-preset="neon-glass-blue"]) .library,
+:where(html[data-shell-preset="neon-glass-blue"]) .properties,
+:where(html[data-shell-preset="neon-glass-blue"]) .preview-stage,
+:where(html[data-shell-preset="neon-glass-blue"]) .token-panel,
+:where(html[data-shell-preset="neon-glass-blue"]) .inspector {
+  box-shadow: var(--ts-glow-border, 0 0 0 0 transparent);
+}
+
+:where(html[data-shell-preset="neon-glass-blue"]) .text-btn:disabled,
+:where(html[data-shell-preset="neon-glass-blue"]) .num:disabled,
+:where(html[data-shell-preset="neon-glass-blue"]) .filter-chip:disabled,
+:where(html[data-shell-preset="neon-glass-blue"]) .shell-theme-switch:disabled,
+:where(html[data-shell-preset="neon-glass-blue"]) .seg button:disabled,
+:where(html[data-shell-preset="neon-glass-blue"]) .studio-switch[data-disabled] {
+  box-shadow: none;
+}

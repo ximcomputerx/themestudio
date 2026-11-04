@@ -3,7 +3,7 @@ import { Tooltip } from '@/components/ui/primitives'
 import { applyCssVariables } from '@/lib/apply-css-variables'
 import { useLabel } from '@/i18n/use-label'
 import { getInspectedElement, readInspectStyle, setInspectedElement } from '@/lib/inspect-target'
-import { cn } from '@/lib/utils'
+import { cn, copyText } from '@/lib/utils'
 import { useStudioStore } from '@/store/studio-store'
 import { instantiatePreset } from '@/theme-engine/core/document'
 import type { ThemeDocument } from '@/theme-engine/core/types'
@@ -108,12 +108,20 @@ function clampInspector(height: number, min: number, max: number): number {
   return Math.round(Math.min(max, Math.max(min, height)))
 }
 
-function inspectorRoom(stage: HTMLElement): { min: number; max: number } {
+function inspectorRoom(stage: HTMLElement, floor: number): { min: number; max: number } {
   const toolbar = stage.querySelector<HTMLElement>('.preview-toolbar')
   const banner = stage.querySelector<HTMLElement>('.preview-banner')
   const limitTop = (banner ?? toolbar)?.getBoundingClientRect().bottom ?? stage.getBoundingClientRect().top
   const max = Math.max(0, stage.getBoundingClientRect().bottom - limitTop)
-  return { min: Math.min(MIN_INSPECTOR_HEIGHT, max), max }
+  return { min: Math.min(floor, max), max }
+}
+
+function inspectorFloor(node: HTMLElement, head: HTMLElement | null): number {
+  if (!head) return MIN_INSPECTOR_HEIGHT
+  const styles = getComputedStyle(node)
+  const pad = (Number.parseFloat(styles.paddingTop) || 0) + (Number.parseFloat(styles.paddingBottom) || 0)
+  const border = (Number.parseFloat(styles.borderTopWidth) || 0) + (Number.parseFloat(styles.borderBottomWidth) || 0)
+  return Math.ceil(head.offsetHeight + pad + border)
 }
 
 function measureInspector(node: HTMLElement, filled: boolean): number {
@@ -132,6 +140,7 @@ function InspectorBar() {
   const theme = useStudioStore((state) => state.theme)
   const setInspection = useStudioStore((state) => state.setInspection)
   const barRef = useRef<HTMLDivElement>(null)
+  const headRef = useRef<HTMLDivElement>(null)
   const dragRef = useRef<{ bottom: number; min: number; max: number; moved: boolean } | null>(null)
   const [dragged, setDragged] = useState<number | null>(null)
   const [placeholder, setPlaceholder] = useState(0)
@@ -149,7 +158,7 @@ function InspectorBar() {
     if (!node || !stage) return
     const measure = () => {
       const natural = measureInspector(node, Boolean(inspection))
-      const room = inspectorRoom(stage)
+      const room = inspectorRoom(stage, inspection ? inspectorFloor(node, headRef.current) : MIN_INSPECTOR_HEIGHT)
       setPlaceholder((current) => (current === natural ? current : natural))
       setLimits((current) => (current.min === room.min && current.max === room.max ? current : room))
     }
@@ -166,7 +175,7 @@ function InspectorBar() {
     if (!stage || !node) return
     event.preventDefault()
     event.currentTarget.setPointerCapture(event.pointerId)
-    const room = inspectorRoom(stage)
+    const room = inspectorRoom(stage, inspection ? inspectorFloor(node, headRef.current) : MIN_INSPECTOR_HEIGHT)
     setPlaceholder(measureInspector(node, Boolean(inspection)))
     setLimits(room)
     dragRef.current = { bottom: stage.getBoundingClientRect().bottom, min: room.min, max: room.max, moved: false }
@@ -217,30 +226,25 @@ function InspectorBar() {
     .map(([key, value]) => `${CSS_NAME[key] ?? key}: ${value}`)
     .join('\n')
   const title = inspection.name.includes(':') ? label(inspection.name) : inspection.name
+  const entries = Object.entries(inspection.style)
+  const background = entries.find(([key]) => key === 'background')
+  const rest = entries.filter(([key]) => key !== 'background')
+  const styleRow = (key: string, value: string) => (
+    <div key={key} className="inspector-row">
+      <span>{label(`inspector:${key}`)}</span>
+      <code>{CSS_NAME[key] ?? key}: {value}</code>
+    </div>
+  )
   return frame(
     false,
     <>
-      <div>
+      <div className="inspector-head" ref={headRef}>
         <strong>{label('inspector:tokenInspector')}</strong>
-        <div>{title}</div>
-        <div>
-          {inspection.tokens.map((token) => (
-            <Tooltip key={token} label={label('inspector:copyToken')}>
-              <button
-                type="button"
-                className="token-chip"
-                onClick={() => void navigator.clipboard.writeText(token)}
-              >
-                {token}
-              </button>
-            </Tooltip>
-          ))}
-        </div>
-        <div className="tool-group" style={{ marginTop: 6 }}>
-          <button type="button" className="text-btn" onClick={() => void navigator.clipboard.writeText(inspection.tokens.join('\n'))}>
+        <div className="inspector-actions">
+          <button type="button" className="text-btn" onClick={() => void copyText(inspection.tokens.join('\n'))}>
             {label('inspector:copyToken')}
           </button>
-          <button type="button" className="text-btn" onClick={() => void navigator.clipboard.writeText(css)}>
+          <button type="button" className="text-btn" onClick={() => void copyText(css)}>
             {label('inspector:copyCss')}
           </button>
           <button type="button" className="text-btn" onClick={() => setInspection(null)}>
@@ -248,14 +252,22 @@ function InspectorBar() {
           </button>
         </div>
       </div>
-      <div className="mono">
-        <div>{label('inspector:computedStyle')}</div>
-        {Object.entries(inspection.style).map(([key, value]) => (
-          <div key={key} className="inspector-row">
-            <span>{label(`inspector:${key}`)}</span>
-            <code>{CSS_NAME[key] ?? key}: {value}</code>
+      <div className="inspector-body">
+        <div className="inspector-name" title={title}>{title}</div>
+        <div className="inspector-kicker">{label('inspector:computedStyle')}</div>
+        {background ? styleRow(background[0], background[1]) : null}
+        {inspection.tokens.length > 0 ? (
+          <div className="inspector-tokens">
+            {inspection.tokens.map((token) => (
+              <Tooltip key={token} label={label('inspector:copyToken')}>
+                <button type="button" className="token-chip" onClick={() => void copyText(token)}>
+                  {token}
+                </button>
+              </Tooltip>
+            ))}
           </div>
-        ))}
+        ) : null}
+        {rest.map(([key, value]) => styleRow(key, value))}
       </div>
     </>
   )

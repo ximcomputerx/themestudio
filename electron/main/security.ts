@@ -39,8 +39,9 @@ export function installContentSecurityPolicy(dev: boolean): void {
 }
 
 export function denyExtraPermissions(): void {
-  session.defaultSession.setPermissionRequestHandler((_contents, _permission, callback) => {
-    callback(false)
+  session.defaultSession.setPermissionRequestHandler((_contents, permission, callback) => {
+    // Copy Token / Copy CSS use navigator.clipboard.writeText. A blanket deny rejects that write.
+    callback(permission === 'clipboard-sanitized-write')
   })
 }
 

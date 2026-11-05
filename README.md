@@ -8,6 +8,32 @@ Version **1.0.0**. Application id `com.themestudio.desktop`. It does not talk to
 
 When this file and `docs/` disagree, the source in `src/` and `electron/` is the one to follow. `docs/archive/` is a snapshot from 2026-10-31.
 
+## Screenshots
+
+Components preview. In each shot, the shell and the preview both use that theme.
+
+### Neon Glass Blue
+
+The token inspector is open.
+
+![Neon Glass Blue](docs/screenshots/1.png)
+
+### Futuristic Electric Blue
+
+![Futuristic Electric Blue](docs/screenshots/2.png)
+
+### Cyan Holographic
+
+![Cyan Holographic](docs/screenshots/3.png)
+
+### Emerald Matrix
+
+![Emerald Matrix](docs/screenshots/4.png)
+
+### Amber Industrial
+
+![Amber Industrial](docs/screenshots/5.png)
+
 ## What you can do
 
 - Theme library: 17 presets, saved themes, favorites, recent themes, search, and filters for style and light or dark. Create, duplicate, rename, delete, import, save, and save as.

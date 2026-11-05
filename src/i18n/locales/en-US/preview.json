@@ -225,8 +225,6 @@
   "terminalCommand": "theme export css",
   "navCount": "4",
   "numberField": "Quantity",
-  "decrease": "Decrease",
-  "increase": "Increase",
   "retired": "Retired",
   "recentExports": "Recent exports",
   "problemWarn": "Primary button contrast 4.1:1",

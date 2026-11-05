@@ -258,34 +258,20 @@ export function PvNumber({
     setValue(Math.min(100, Math.max(0, next)))
   }
   return (
-    <div
-      className={cx('pv-number', forced && `is-${forced}`)}
+    <input
+      className={cx('pv-number', forced && `is-${forced}`, disabled && 'is-disabled')}
+      type="number"
+      min={0}
+      max={100}
+      step={1}
+      value={value}
+      aria-label={t('numberField')}
+      disabled={disabled}
       data-testid={testId}
       data-inspect="preview:inspect.numberInput"
       data-tokens="--ts-color-glass-hover --ts-color-text-primary --ts-color-border --ts-color-focus-border --ts-glow-focus --ts-radius-control"
-    >
-      <input
-        className="pv-number-input"
-        type="number"
-        min={0}
-        max={100}
-        step={1}
-        value={value}
-        aria-label={t('numberField')}
-        disabled={disabled}
-        onChange={(event) => commit(Number(event.target.value))}
-      />
-      <button type="button" className="pv-number-step" aria-label={t('decrease')} disabled={disabled} onClick={() => commit(value - 1)}>
-        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-          <path d="M1.5 7h11" stroke="currentColor" strokeWidth="1.4" />
-        </svg>
-      </button>
-      <button type="button" className="pv-number-step" aria-label={t('increase')} disabled={disabled} onClick={() => commit(value + 1)}>
-        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-          <path d="M7 1.5v11M1.5 7h11" stroke="currentColor" strokeWidth="1.4" />
-        </svg>
-      </button>
-    </div>
+      onChange={(event) => commit(Number(event.target.value))}
+    />
   )
 }
 

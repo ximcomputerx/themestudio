@@ -343,13 +343,13 @@ export function PreviewStage() {
             {label('preview:zoom')}
             <input
               className="num"
-              style={{ width: 64, marginLeft: 6 }}
               type="number"
               min={0.5}
               max={1.5}
               step={0.05}
               aria-label={label('preview:zoom')}
               value={zoom}
+              style={{ width: 64, marginLeft: 6 }}
               onChange={(event) => {
                 const next = Number(event.target.value)
                 if (Number.isFinite(next)) setPreviewZoom(next)

@@ -225,8 +225,6 @@
   "terminalCommand": "theme export css",
   "navCount": "4",
   "numberField": "数量",
-  "decrease": "减少",
-  "increase": "增加",
   "retired": "已停用",
   "recentExports": "最近导出",
   "problemWarn": "主按钮对比度 4.1:1",

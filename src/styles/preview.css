@@ -293,7 +293,7 @@
   box-shadow: var(--ts-glow-button), var(--ts-glow-hover);
 }
 
-.pv-btn-primary:focus-visible, .pv-btn-primary.is-focus, .pv-input:focus, .pv-input.is-focus, .pv-select:focus-visible, .pv-number:focus-within, .pv-number.is-focus {
+.pv-btn-primary:focus-visible, .pv-btn-primary.is-focus, .pv-input:focus, .pv-input.is-focus, .pv-select:focus-visible, .pv-number:focus, .pv-number.is-focus {
   outline: none;
   border-color: var(--ts-color-focus-border);
   box-shadow: var(--ts-glow-focus);
@@ -314,7 +314,7 @@
   box-shadow: var(--ts-glow-hover);
 }
 
-.pv-btn:disabled, .pv-btn.is-disabled, .pv-input:disabled, .pv-input.is-disabled, .pv-textarea:disabled, .pv-link:disabled, .pv-link.is-disabled, .pv-list-row:disabled, .pv-list-row.is-disabled, .pv-menu button:disabled, .pv-menu button.is-disabled, .pv-icon-btn:disabled, .pv-icon-btn.is-disabled, .pv-select:disabled, .pv-range:disabled, .pv-tab:disabled, .pv-check:has(input:disabled), .pv-radio:has(input:disabled), .pv-switch:has(input:disabled), .pv-number:has(input:disabled) {
+.pv-btn:disabled, .pv-btn.is-disabled, .pv-input:disabled, .pv-input.is-disabled, .pv-textarea:disabled, .pv-link:disabled, .pv-link.is-disabled, .pv-list-row:disabled, .pv-list-row.is-disabled, .pv-menu button:disabled, .pv-menu button.is-disabled, .pv-icon-btn:disabled, .pv-icon-btn.is-disabled, .pv-select:disabled, .pv-range:disabled, .pv-tab:disabled, .pv-check:has(input:disabled), .pv-radio:has(input:disabled), .pv-switch:has(input:disabled), .pv-number:disabled, .pv-number.is-disabled {
   opacity: 0.45;
   cursor: not-allowed;
   box-shadow: none;
@@ -388,7 +388,7 @@
 .pv-input:hover:not(:focus):not(.is-focus),
 .pv-input.is-hover,
 .pv-textarea:hover:not(:focus):not(.is-focus),
-.pv-number:hover:not(:focus-within):not(.is-focus),
+.pv-number:hover:not(:focus):not(.is-focus),
 .pv-number.is-hover {
   border-color: var(--ts-color-hover-border);
 }
@@ -398,50 +398,13 @@
 .pv-number {
   height: 34px;
   width: 100%;
-  display: flex;
-  align-items: stretch;
-  padding: 0;
-  overflow: hidden;
-}
-
-.pv-number-input {
-  flex: 1;
-  min-width: 0;
-  height: 100%;
-  margin: 0;
-  border: 0;
-  outline: none;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
+  padding: 0 10px;
   font-variant-numeric: tabular-nums;
-  padding: 0 8px;
-  appearance: textfield;
-  -moz-appearance: textfield;
+  color-scheme: dark;
 }
 
-.pv-number-input::-webkit-outer-spin-button,
-.pv-number-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.pv-number-step {
-  width: 28px;
-  flex: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-left: var(--ts-border-width) solid var(--ts-color-border);
-  background: transparent;
-  color: var(--ts-color-text-primary);
-  display: grid;
-  place-items: center;
-}
-
-.pv-number-step:focus-visible {
-  outline: none;
+.theme-scope[data-color-scheme='light'] .pv-number {
+  color-scheme: light;
 }
 
 .pv-row, .pv-inline {
